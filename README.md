@@ -1,5 +1,9 @@
 # Rumale::SVM
 
+[![Build Status](https://travis-ci.org/yoshoku/rumale-svm.svg?branch=master)](https://travis-ci.org/yoshoku/rumale-svm)
+[![Coverage Status](https://coveralls.io/repos/github/yoshoku/rumale-svm/badge.svg?branch=master)](https://coveralls.io/github/yoshoku/rumale-svm?branch=master)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/rumale-svm/blob/master/LICENSE.txt)
+
 Rumale::SVM provides support vector machine algorithms in LIBSVM and LIBLINEAR
 with [Rumale](https://github.com/yoshoku/rumale) interface.
 
@@ -31,7 +35,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rumale-svm. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/yoshoku/rumale-svm. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
