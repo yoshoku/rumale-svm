@@ -15,6 +15,7 @@ require 'rumale/svm'
 require 'rumale/utils'
 require 'rumale/pairwise_metric'
 require 'rumale/model_selection/stratified_k_fold'
+require 'rumale/model_selection/k_fold'
 
 def xor_data(n_samples = 1000)
   rng = Random.new(1)
@@ -50,5 +51,9 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true unless meta.key?(:aggregate_failures)
   end
 end

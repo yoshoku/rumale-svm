@@ -2,3 +2,4 @@
 
 require 'rumale/svm/version'
 require 'rumale/svm/svc'
+require 'rumale/svm/svr'
