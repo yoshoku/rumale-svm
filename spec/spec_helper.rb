@@ -42,6 +42,18 @@ def three_blobs(n_samples = 900)
   [x, y]
 end
 
+def two_blobs(n_samples = 1000)
+  rng = Random.new(1)
+  pos_clstr_size = (n_samples * 0.95).to_i
+  neg_clstr_size = n_samples - pos_clstr_size
+  a = Rumale::Utils.rand_normal([pos_clstr_size, 2], rng, 0.0, 0.1)
+  b = Rumale::Utils.rand_normal([neg_clstr_size, 2], rng, 8.0, 0.1)
+  x = Numo::NArray.vstack([a, b])
+  y = Numo::NArray.concatenate([Numo::Int32.zeros(pos_clstr_size) + 1,
+                                Numo::Int32.zeros(neg_clstr_size) - 1])
+  [x, y]
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
