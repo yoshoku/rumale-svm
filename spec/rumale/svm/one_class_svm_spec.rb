@@ -59,8 +59,8 @@ RSpec.describe Rumale::SVM::OneClassSVM do
     end
 
     it 'dumps and restores itself using Marshal module.' do
-      expect(copied.instance_variable_get(:@params)).to eq(ocsvm.instance_variable_get(:@params))
       expect(copied.instance_variable_get(:@model)).to eq(ocsvm.instance_variable_get(:@model))
+      expect(copied.params).to eq(ocsvm.params)
     end
   end
 

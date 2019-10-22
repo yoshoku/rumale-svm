@@ -8,7 +8,6 @@ RSpec.describe Rumale::SVM::SVR do
   let(:y) { dataset[1] }
   let(:n_samples) { x.shape[0] }
   let(:n_features) { x.shape[1] }
-  let(:n_classes) { y.to_a.uniq.size }
   let(:kernel) { 'rbf' }
   let(:svr) { described_class.new(kernel: kernel, gamma: 0.1, degree: 2, random_seed: 1) }
   let(:copied) { Marshal.load(Marshal.dump(svr)) }

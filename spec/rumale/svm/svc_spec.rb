@@ -69,7 +69,7 @@ RSpec.describe Rumale::SVM::SVC do
     it 'dumps and restores itself using Marshal module.' do
       expect(copied.instance_variable_get(:@params)).to eq(svc.instance_variable_get(:@params))
       expect(copied.instance_variable_get(:@model)).to eq(svc.instance_variable_get(:@model))
-      expect(copied.score(x, y)).to eq(1.0)
+      expect(copied.score(x, y)).to eq(svc.score(x, y))
     end
   end
 
