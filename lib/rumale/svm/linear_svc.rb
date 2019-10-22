@@ -7,7 +7,7 @@ require 'rumale/probabilistic_output'
 
 module Rumale
   module SVM
-    # LinearSVC is a class that provides Rumale interface for Support Vector Classifier in LIBLINEAR.
+    # LinearSVC is a class that provides Support Vector Classifier in LIBLINEAR with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::LinearSVC.new(penalty: 'l2', loss: 'squared_hinge', reg_param: 1.0, random_seed: 1)

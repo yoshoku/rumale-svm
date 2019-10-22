@@ -6,7 +6,7 @@ require 'rumale/base/regressor'
 
 module Rumale
   module SVM
-    # LinearSVR is a class that provides Rumale interface for Support Vector Regressor in LIBLINEAR.
+    # LinearSVR is a class that provides Support Vector Regressor in LIBLINEAR with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::LinearSVR.new(reg_param: 1.0, random_seed: 1)

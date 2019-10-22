@@ -6,7 +6,7 @@ require 'rumale/base/classifier'
 
 module Rumale
   module SVM
-    # SVC is a class that provides Rumale interface for Kernel C-Support Vector Machine in LIBSVM.
+    # SVC is a class that provides Kernel C-Support Vector Classifier in LIBSVM with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::SVC.new(reg_param: 1.0, kernel: 'rbf', gamma: 10.0, random_seed: 1)
@@ -16,7 +16,7 @@ module Rumale
       include Base::BaseEstimator
       include Base::Classifier
 
-      # Create a new classifier with Kernel C-Support Vector Machine.
+      # Create a new classifier with Kernel C-Support Vector Classifier.
       #
       # @param reg_param [Float] The regularization parameter.
       # @param kernel [String] The type of kernel function ('rbf', 'linear', 'poly', 'sigmoid', and 'precomputed').
@@ -87,7 +87,8 @@ module Rumale
         Numo::Int32.cast(Numo::Libsvm.predict(xx, libsvm_params, @model))
       end
 
-      # Predict probability for samples.
+      # Predict class probability for samples.
+      # This method works correctly only if the probability parameter is true.
       #
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the probailities.
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].

@@ -6,7 +6,7 @@ require 'rumale/base/classifier'
 
 module Rumale
   module SVM
-    # SVC is a class that provides Rumale interface for Kernel Nu-Support Vector Classifier in LIBSVM.
+    # NuSVC is a class that provides Kernel Nu-Support Vector Classifier in LIBSVM with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::NuSVC.new(nu: 0.5, kernel: 'rbf', gamma: 10.0, random_seed: 1)
@@ -55,7 +55,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The training data to be used for fitting the model.
       #   If the kernel is 'precomputed', x must be a square distance matrix (shape: [n_samples, n_samples]).
       # @param y [Numo::Int32] (shape: [n_samples]) The labels to be used for fitting the model.
-      # @return [SVC] The learned classifier itself.
+      # @return [NuSVC] The learned classifier itself.
       def fit(x, y)
         check_sample_array(x)
         check_label_array(y)
@@ -87,7 +87,8 @@ module Rumale
         Numo::Int32.cast(Numo::Libsvm.predict(xx, libsvm_params, @model))
       end
 
-      # Predict probability for samples.
+      # Predict class probability for samples.
+      # This method works correctly only if the probability parameter is true.
       #
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the probailities.
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
@@ -99,7 +100,7 @@ module Rumale
       end
 
       # Dump marshal data.
-      # @return [Hash] The marshal data about SVC.
+      # @return [Hash] The marshal data about NuSVC.
       def marshal_dump
         { params: @params,
           model: @model }

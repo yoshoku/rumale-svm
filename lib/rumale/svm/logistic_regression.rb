@@ -6,7 +6,7 @@ require 'rumale/base/classifier'
 
 module Rumale
   module SVM
-    # LogisticRegression is a class that provides Rumale interface for Logistic Regression in LIBLINEAR.
+    # LogisticRegression is a class that provides Logistic Regression in LIBLINEAR with Rumale interface
     #
     # @example
     #   estimator = Rumale::SVM::LogisticRegression.new(penalty: 'l2', dual: false, reg_param: 1.0, random_seed: 1)

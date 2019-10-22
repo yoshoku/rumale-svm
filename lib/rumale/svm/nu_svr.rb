@@ -6,7 +6,7 @@ require 'rumale/base/regressor'
 
 module Rumale
   module SVM
-    # NuSVR is a class that provides Rumale interface for Kernel Nu-Support Vector Regressor in LIBSVM.
+    # NuSVR is a class that provides Kernel Nu-Support Vector Regressor in LIBSVM with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::NuSVR.new(nu: 0.5, kernel: 'rbf', gamma: 10.0, random_seed: 1)

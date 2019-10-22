@@ -6,7 +6,7 @@ require 'rumale/base/regressor'
 
 module Rumale
   module SVM
-    # SVR is a class that provides Rumale interface for Kernel Epsilon-Support Vector Regressor in LIBSVM.
+    # SVR is a class that provides Kernel Epsilon-Support Vector Regressor in LIBSVM with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::SVR.new(reg_param: 1.0, kernel: 'rbf', gamma: 10.0, random_seed: 1)
@@ -16,7 +16,7 @@ module Rumale
       include Base::BaseEstimator
       include Base::Regressor
 
-      # Create a new classifier with Kernel Epsilon-Support Vector Regressor.
+      # Create a new regressor with Kernel Epsilon-Support Vector Regressor.
       #
       # @param reg_param [Float] The regularization parameter.
       # @param epsilon [Float] The epsilon parameter in loss function of espsilon-svr.

@@ -6,7 +6,7 @@ require 'rumale/validation'
 
 module Rumale
   module SVM
-    # OneClassSVM is a class that provides Rumale interface for One-class Support Vector Machine in LIBSVM.
+    # OneClassSVM is a class that provides One-class Support Vector Machine in LIBSVM with Rumale interface.
     #
     # @example
     #   estimator = Rumale::SVM::OneClassSVM.new(nu: 0.5, kernel: 'rbf', gamma: 10.0, random_seed: 1)
