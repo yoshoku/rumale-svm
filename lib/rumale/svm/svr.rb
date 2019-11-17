@@ -31,22 +31,23 @@ module Rumale
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(reg_param: 1.0, epsilon: 0.1, kernel: 'rbf', degree: 3, gamma: 1.0, coef0: 0.0,
                      shrinking: true, cache_size: 200.0, tol: 1e-3, verbose: false, random_seed: nil)
-        check_params_float(reg_param: reg_param, epsilon: epsilon, gamma: gamma, coef0: coef0, cache_size: cache_size, tol: tol)
-        check_params_integer(degree: degree)
+        check_params_numeric(reg_param: reg_param, degree: degree, epsilon: epsilon, gamma: gamma, coef0: coef0,
+                             cache_size: cache_size, tol: tol)
+        check_params_string(kernel: kernel)
         check_params_boolean(shrinking: shrinking, verbose: verbose)
-        check_params_type_or_nil(Integer, random_seed: random_seed)
+        check_params_numeric_or_nil(random_seed: random_seed)
         @params = {}
-        @params[:reg_param] = reg_param
-        @params[:epsilon] = epsilon
+        @params[:reg_param] = reg_param.to_f
+        @params[:epsilon] = epsilon.to_f
         @params[:kernel] = kernel
-        @params[:degree] = degree
-        @params[:gamma] = gamma
-        @params[:coef0] = coef0
+        @params[:degree] = degree.to_i
+        @params[:gamma] = gamma.to_f
+        @params[:coef0] = coef0.to_f
         @params[:shrinking] = shrinking
-        @params[:cache_size] = cache_size
-        @params[:tol] = tol
+        @params[:cache_size] = cache_size.to_f
+        @params[:tol] = tol.to_f
         @params[:verbose] = verbose
-        @params[:random_seed] = random_seed
+        @params[:random_seed] = random_seed.nil? ? nil : random_seed.to_i
         @model = nil
       end
 

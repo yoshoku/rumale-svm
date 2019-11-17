@@ -42,23 +42,22 @@ module Rumale
       # @param verbose [Boolean] The flag indicating whether to output learning process message
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(penalty: 'l2', loss: 'squared_hinge', dual: true, reg_param: 1.0,
-                     fit_bias: true, bias_scale: 1.0, probability: false,
-                     tol: 1e-3, verbose: false, random_seed: nil)
+                     fit_bias: true, bias_scale: 1.0, probability: false, tol: 1e-3, verbose: false, random_seed: nil)
         check_params_string(penalty: penalty, loss: loss)
-        check_params_float(reg_param: reg_param, bias_scale: bias_scale, tol: tol)
+        check_params_numeric(reg_param: reg_param, bias_scale: bias_scale, tol: tol)
         check_params_boolean(dual: dual, fit_bias: fit_bias, probability: probability, verbose: verbose)
-        check_params_type_or_nil(Integer, random_seed: random_seed)
+        check_params_numeric_or_nil(random_seed: random_seed)
         @params = {}
         @params[:penalty] = penalty == 'l1' ? 'l1' : 'l2'
         @params[:loss] = loss == 'hinge' ? 'hinge' : 'squared_hinge'
         @params[:dual] = dual
-        @params[:reg_param] = reg_param
+        @params[:reg_param] = reg_param.to_f
         @params[:fit_bias] = fit_bias
-        @params[:bias_scale] = bias_scale
+        @params[:bias_scale] = bias_scale.to_f
         @params[:probability] = probability
-        @params[:tol] = tol
+        @params[:tol] = tol.to_f
         @params[:verbose] = verbose
-        @params[:random_seed] = random_seed
+        @params[:random_seed] = random_seed.nil? ? nil : random_seed.to_i
         @model = nil
         @weight_vec = nil
         @bias_term = nil

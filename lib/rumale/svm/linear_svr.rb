@@ -41,19 +41,19 @@ module Rumale
       def initialize(loss: 'squared_epsilon_insensitive', dual: true, reg_param: 1.0, epsilon: 0.1,
                      fit_bias: true, bias_scale: 1.0, tol: 1e-3, verbose: false, random_seed: nil)
         check_params_string(loss: loss)
-        check_params_float(reg_param: reg_param, epsilon: epsilon, bias_scale: bias_scale, tol: tol)
+        check_params_numeric(reg_param: reg_param, epsilon: epsilon, bias_scale: bias_scale, tol: tol)
         check_params_boolean(dual: dual, fit_bias: fit_bias, verbose: verbose)
-        check_params_type_or_nil(Integer, random_seed: random_seed)
+        check_params_numeric_or_nil(random_seed: random_seed)
         @params = {}
         @params[:loss] = loss == 'epsilon_insensitive' ? 'epsilon_insensitive' : 'squared_epsilon_insensitive'
         @params[:dual] = dual
-        @params[:reg_param] = reg_param
-        @params[:epsilon] = epsilon
+        @params[:reg_param] = reg_param.to_f
+        @params[:epsilon] = epsilon.to_f
         @params[:fit_bias] = fit_bias
-        @params[:bias_scale] = bias_scale
-        @params[:tol] = tol
+        @params[:bias_scale] = bias_scale.to_f
+        @params[:tol] = tol.to_f
         @params[:verbose] = verbose
-        @params[:random_seed] = random_seed
+        @params[:random_seed] = random_seed.nil? ? nil : random_seed.to_i
         @model = nil
         @weight_vec = nil
         @bias_term = nil
