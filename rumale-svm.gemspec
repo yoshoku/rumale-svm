@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'numo-liblinear', '~> 1.0'
   spec.add_runtime_dependency 'numo-libsvm', '~> 1.0'
-  spec.add_runtime_dependency 'rumale'
+  spec.add_runtime_dependency 'rumale', '~> 0.14'
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'coveralls', '~> 0.8'
   spec.add_development_dependency 'rake', '~> 10.0'
