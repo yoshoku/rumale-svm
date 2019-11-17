@@ -16,7 +16,6 @@ RSpec.describe Rumale::SVM::LinearSVR do
   let(:copied) { Marshal.load(Marshal.dump(svr)) }
 
   shared_examples 'regression task' do
-
     before { svr.fit(x, y) }
 
     it 'evaluates regression performance' do
