@@ -55,7 +55,7 @@ module Rumale
       #     If the kernel is 'precomputed', x must be a square distance matrix (shape: [n_samples, n_samples]).
       # @return [OneClassSVM] The learned estimator itself.
       def fit(x, _y = nil)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         dummy = Numo::DFloat.ones(x.shape[0])
         @model = Numo::Libsvm.train(x, dummy, libsvm_params)
         self
@@ -67,7 +67,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         Numo::Libsvm.decision_function(x, libsvm_params, @model)
       end
 
@@ -77,7 +77,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::Int32] (shape: [n_samples]) Predicted label per sample.
       def predict(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         Numo::Int32.cast(Numo::Libsvm.predict(x, libsvm_params, @model))
       end
 

@@ -58,8 +58,8 @@ module Rumale
       # @param y [Numo::DFloat] (shape: [n_samples]) The target values to be used for fitting the model.
       # @return [SVR] The learned regressor itself.
       def fit(x, y)
-        check_sample_array(x)
-        check_tvalue_array(y)
+        x = check_convert_sample_array(x)
+        y = check_convert_tvalue_array(y)
         check_sample_tvalue_size(x, y)
         xx = precomputed_kernel? ? add_index_col(x) : x
         @model = Numo::Libsvm.train(xx, y, libsvm_params)
@@ -72,7 +72,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples]) Predicted value per sample.
       def predict(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.predict(xx, libsvm_params, @model)
       end

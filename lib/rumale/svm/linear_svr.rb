@@ -65,8 +65,8 @@ module Rumale
       # @param y [Numo::DFloat] (shape: [n_samples]) The target values to be used for fitting the model.
       # @return [LinearSVR] The learned regressor itself.
       def fit(x, y)
-        check_sample_array(x)
-        check_tvalue_array(y)
+        x = check_convert_sample_array(x)
+        y = check_convert_tvalue_array(y)
         check_sample_tvalue_size(x, y)
         xx = fit_bias? ? expand_feature(x) : x
         @model = Numo::Liblinear.train(xx, y, liblinear_params)
@@ -79,7 +79,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the labels.
       # @return [Numo::DFloat] (shape: [n_samples]) Predicted value per sample.
       def predict(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.predict(xx, liblinear_params, @model)
       end

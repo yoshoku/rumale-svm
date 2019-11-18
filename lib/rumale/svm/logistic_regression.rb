@@ -63,8 +63,8 @@ module Rumale
       # @param y [Numo::Int32] (shape: [n_samples]) The labels to be used for fitting the model.
       # @return [LogisticRegression] The learned classifier itself.
       def fit(x, y)
-        check_sample_array(x)
-        check_label_array(y)
+        x = check_convert_sample_array(x)
+        y = check_convert_label_array(y)
         check_sample_label_size(x, y)
         xx = fit_bias? ? expand_feature(x) : x
         @model = Numo::Liblinear.train(xx, y, liblinear_params)
@@ -77,7 +77,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to compute the scores.
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.decision_function(xx, liblinear_params, @model)
       end
@@ -87,7 +87,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the labels.
       # @return [Numo::Int32] (shape: [n_samples]) Predicted class label per sample.
       def predict(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Int32.cast(Numo::Liblinear.predict(xx, liblinear_params, @model))
       end
@@ -98,7 +98,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the probailities.
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
       def predict_proba(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.predict_proba(xx, liblinear_params, @model)
       end

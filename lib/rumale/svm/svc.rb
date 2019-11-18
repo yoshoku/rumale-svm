@@ -57,8 +57,8 @@ module Rumale
       # @param y [Numo::Int32] (shape: [n_samples]) The labels to be used for fitting the model.
       # @return [SVC] The learned classifier itself.
       def fit(x, y)
-        check_sample_array(x)
-        check_label_array(y)
+        x = check_convert_sample_array(x)
+        y = check_convert_label_array(y)
         check_sample_label_size(x, y)
         xx = precomputed_kernel? ? add_index_col(x) : x
         @model = Numo::Libsvm.train(xx, y, libsvm_params)
@@ -71,7 +71,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.decision_function(xx, libsvm_params, @model)
       end
@@ -82,7 +82,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::Int32] (shape: [n_samples]) Predicted class label per sample.
       def predict(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Int32.cast(Numo::Libsvm.predict(xx, libsvm_params, @model))
       end
@@ -94,7 +94,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
       def predict_proba(x)
-        check_sample_array(x)
+        x = check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.predict_proba(xx, libsvm_params, @model)
       end
