@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
     Rumale-SVM provides support vector machine algorithms of LIBSVM and LIBLINEAR with Rumale interface.
   MSG
   spec.homepage = 'https://github.com/yoshoku/rumale-svm'
+  spec.license = 'BSD-3-Clause'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/yoshoku/rumale-svm'
