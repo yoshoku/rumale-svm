@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/yoshoku/rumale-svm/badge.svg?branch=master)](https://coveralls.io/github/yoshoku/rumale-svm?branch=master)
 [![Gem Version](https://badge.fury.io/rb/rumale-svm.svg)](https://badge.fury.io/rb/rumale-svm)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/rumale-svm/blob/master/LICENSE.txt)
-[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://yoshoku.github.io/rumale-svm/doc/)
+[![Documentation](http://img.shields.io/badge/api-reference-blue.svg)](https://yoshoku.github.io/rumale-svm/doc/)
 
 Rumale::SVM provides support vector machine algorithms in
 [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/) and [LIBLINEAR](https://www.csie.ntu.edu.tw/~cjlin/liblinear/)
@@ -29,6 +29,10 @@ And then execute:
 Or install it yourself as:
 
     $ gem install rumale-svm
+
+## Documentation
+
+- [Rumale::SVM API Documentation](https://yoshoku.github.io/rumale-svm/doc/)
 
 ## Usage
 Download pendigits dataset from [LIBSVM DATA](https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/) web page.
