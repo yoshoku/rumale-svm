@@ -101,4 +101,12 @@ RSpec.describe Rumale::SVM::SVR do
 
     it_behaves_like 'regression task'
   end
+
+  context 'when called predict method before training with fit method' do
+    it 'raises Runtime error' do
+      expect { svr.predict(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::SVR#predict expects to be called after training the model with the fit method.'
+      )
+    end
+  end
 end

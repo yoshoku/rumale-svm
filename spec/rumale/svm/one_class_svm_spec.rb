@@ -97,4 +97,17 @@ RSpec.describe Rumale::SVM::OneClassSVM do
 
     it_behaves_like 'distribution estimation task'
   end
+
+  context 'when called predict method before training with fit method' do
+    let(:kernel) { 'linear' }
+
+    it 'raises Runtime error' do
+      expect { ocsvm.predict(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::OneClassSVM#predict expects to be called after training the model with the fit method.'
+      )
+      expect { ocsvm.decision_function(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::OneClassSVM#decision_function expects to be called after training the model with the fit method.'
+      )
+    end
+  end
 end

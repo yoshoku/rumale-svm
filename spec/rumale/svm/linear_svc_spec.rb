@@ -148,4 +148,20 @@ RSpec.describe Rumale::SVM::LinearSVC do
     it_behaves_like 'binary classification task'
     it_behaves_like 'hold out'
   end
+
+  context 'when called predict method before training with fit method' do
+    let(:dataset) { two_balls }
+
+    it 'raises Runtime error' do
+      expect { svc.predict(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LinearSVC#predict expects to be called after training the model with the fit method.'
+      )
+      expect { svc.predict_proba(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LinearSVC#predict_proba expects to be called after training the model with the fit method.'
+      )
+      expect { svc.decision_function(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LinearSVC#decision_function expects to be called after training the model with the fit method.'
+      )
+    end
+  end
 end

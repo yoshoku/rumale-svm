@@ -139,4 +139,20 @@ RSpec.describe Rumale::SVM::LogisticRegression do
     it_behaves_like 'binary classification task'
     it_behaves_like 'hold out'
   end
+
+  context 'when called predict method before training with fit method' do
+    let(:dataset) { two_balls }
+
+    it 'raises Runtime error' do
+      expect { logit.predict(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LogisticRegression#predict expects to be called after training the model with the fit method.'
+      )
+      expect { logit.predict_proba(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LogisticRegression#predict_proba expects to be called after training the model with the fit method.'
+      )
+      expect { logit.decision_function(x) }.to raise_error(
+        RuntimeError, 'Rumale::SVM::LogisticRegression#decision_function expects to be called after training the model with the fit method.'
+      )
+    end
+  end
 end
