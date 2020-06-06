@@ -15,9 +15,24 @@ AllCops:
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 Layout/LineLength:
   Max: 145
   IgnoredPatterns: ['(\A|\s)#']
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
 
 Metrics/ModuleLength:
   Max: 200
@@ -57,6 +72,21 @@ Security/MarshalLoad:
 Style/Documentation:
   Enabled: false
 
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
 Style/FormatStringToken:
   Enabled: false
 
@@ -74,3 +104,4 @@ RSpec/InstanceVariable:
 
 RSpec/LeakyConstantDeclaration:
   Enabled: false
+
