@@ -1,3 +1,6 @@
+# 0.4.0
+- Add linear one-class support vector machine.
+
 # 0.3.0
 - Fix to raise error when calling prediction method before training model.
 - Fix some config files.
