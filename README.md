@@ -1,6 +1,6 @@
 # Rumale::SVM
 
-[![Build Status](https://travis-ci.org/yoshoku/rumale-svm.svg?branch=master)](https://travis-ci.org/yoshoku/rumale-svm)
+[![Build Status](https://github.com/yoshoku/rumale-svm/workflows/build/badge.svg)](https://github.com/yoshoku/rumale-svm/actions?query=workflow%3Abuild)
 [![Gem Version](https://badge.fury.io/rb/rumale-svm.svg)](https://badge.fury.io/rb/rumale-svm)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/rumale-svm/blob/master/LICENSE.txt)
 [![Documentation](http://img.shields.io/badge/api-reference-blue.svg)](https://yoshoku.github.io/rumale-svm/doc/)
