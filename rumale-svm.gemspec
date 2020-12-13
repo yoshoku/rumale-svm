@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/yoshoku/rumale-svm'
-  spec.metadata['changelog_uri'] = 'https://github.com/yoshoku/rumale-svm/blob/master/CHANGELOG.md'
+  spec.metadata['changelog_uri'] = 'https://github.com/yoshoku/rumale-svm/blob/main/CHANGELOG.md'
   spec.metadata['documentation_uri'] = 'https://yoshoku.github.io/rumale-svm/doc/'
 
   # Specify which files should be added to the gem when it is released.
