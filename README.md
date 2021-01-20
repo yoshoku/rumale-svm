@@ -1,7 +1,7 @@
 # Rumale::SVM
 
 [![Build Status](https://github.com/yoshoku/rumale-svm/workflows/build/badge.svg)](https://github.com/yoshoku/rumale-svm/actions?query=workflow%3Abuild)
-[![Coverage Status](https://coveralls.io/repos/github/yoshoku/rumale-svm/badge.svg?branch=master)](https://coveralls.io/github/yoshoku/rumale-svm?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/yoshoku/rumale-svm/badge.svg?branch=main)](https://coveralls.io/github/yoshoku/rumale-svm?branch=main)
 [![Gem Version](https://badge.fury.io/rb/rumale-svm.svg)](https://badge.fury.io/rb/rumale-svm)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/rumale-svm/blob/main/LICENSE.txt)
 [![Documentation](http://img.shields.io/badge/api-reference-blue.svg)](https://yoshoku.github.io/rumale-svm/doc/)
