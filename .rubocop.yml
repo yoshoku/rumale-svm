@@ -1,9 +1,11 @@
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.4
+  NewCops: enable
+  TargetRubyVersion: 2.5
   DisplayCopNames: true
   DisplayStyleGuide: true
   Exclude:
@@ -105,3 +107,5 @@ RSpec/InstanceVariable:
 RSpec/LeakyConstantDeclaration:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Max: 25
