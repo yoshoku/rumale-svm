@@ -41,9 +41,6 @@ module Rumale
         @params[:tol] = tol.to_f
         @params[:verbose] = verbose
         @params[:random_seed] = random_seed.nil? ? nil : random_seed.to_i
-        @weight_vec = nil
-        @bias_term = nil
-        @model = nil
       end
 
       # Fit the model with given training data.
