@@ -1,0 +1,47 @@
+module Rumale
+  module Base
+    module BaseEstimator
+      attr_reader params: Hash[Symbol, untyped]
+
+      private
+
+      def enable_linalg?: (?warning: bool warning) -> bool
+      def enable_parallel?: () -> bool
+      def n_processes: () -> (1 | Integer)
+      def parallel_map: (untyped n_outputs) { () -> untyped } -> untyped
+    end
+
+    module Classifier
+      include Validation
+
+      def fit: () -> untyped
+      def predict: () -> untyped
+      def score: (untyped x, untyped y) -> untyped
+    end
+
+    module Regressor
+      include Validation
+
+      def fit: () -> untyped
+      def predict: () -> untyped
+      def score: (untyped x, untyped y) -> untyped
+    end
+  end
+end
+
+module Rumale
+  module Validation
+    def self?.check_convert_sample_array: (untyped x) -> untyped
+    def self?.check_convert_label_array: (untyped y) -> untyped
+    def self?.check_convert_tvalue_array: (untyped y) -> untyped
+    def self?.check_sample_label_size: (untyped x, untyped y) -> nil
+    def self?.check_sample_tvalue_size: (untyped x, untyped y) -> nil
+    def self?.check_params_type: (untyped `type`, ?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_type_or_nil: (untyped `type`, ?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_numeric: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_numeric_or_nil: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_string: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_boolean: (?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_positive: (?::Hash[untyped, untyped] params) -> nil
+  end
+end
