@@ -1,0 +1,241 @@
+class Float < Numeric
+  def /: (Complex) -> Complex
+       | (Numeric) -> Float
+       | (Numo::DFloat) -> Numo::DFloat
+       | ...
+end
+
+module Numo
+  module NMath
+    # def self.method_missing: (*untyped) -> untyped
+    def self?.exp: (Numo::DFloat) -> Numo::DFloat
+  end
+
+  class NArray
+    def self.cast: (untyped a) -> untyped
+    def self.hstack: (untyped arrays) -> untyped
+    def self.ones: (*untyped) -> untyped
+    def self.zeros: (*untyped) -> untyped
+    def initialize: (*untyped) -> untyped
+    def reshape: (*untyped) -> untyped
+    def shape: () -> Array[Integer]
+    def size: () -> Integer
+    def transpose: (*untyped) -> untyped
+  end
+
+  class RObject < NArray
+  end
+
+  class DComplex < NArray
+  end
+
+  class SComplex < NArray
+  end
+
+  class DFloat < NArray
+    def self.[]: (*untyped) -> untyped
+    def []: (*untyped) -> untyped
+    def sum: (*untyped) -> untyped
+    def +: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::DFloat
+         | (Numo::UInt32) -> Numo::DFloat
+         | (Numo::UInt16) -> Numo::DFloat
+         | (Numo::UInt8) -> Numo::DFloat
+         | (Numo::Int64) -> Numo::DFloat
+         | (Numo::Int32) -> Numo::DFloat
+         | (Numo::Int16) -> Numo::DFloat
+         | (Numo::Int8) -> Numo::DFloat
+         | (Numo::Bit) -> Numo::DFloat
+         | (Complex) -> Numo::DComplex
+         | (Numeric) -> Numo::DFloat
+    def -: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::DFloat
+         | (Numo::UInt32) -> Numo::DFloat
+         | (Numo::UInt16) -> Numo::DFloat
+         | (Numo::UInt8) -> Numo::DFloat
+         | (Numo::Int64) -> Numo::DFloat
+         | (Numo::Int32) -> Numo::DFloat
+         | (Numo::Int16) -> Numo::DFloat
+         | (Numo::Int8) -> Numo::DFloat
+         | (Numo::Bit) -> Numo::DFloat
+         | (Complex) -> Numo::DComplex
+         | (Numeric) -> Numo::DFloat
+    def *: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::DFloat
+         | (Numo::UInt32) -> Numo::DFloat
+         | (Numo::UInt16) -> Numo::DFloat
+         | (Numo::UInt8) -> Numo::DFloat
+         | (Numo::Int64) -> Numo::DFloat
+         | (Numo::Int32) -> Numo::DFloat
+         | (Numo::Int16) -> Numo::DFloat
+         | (Numo::Int8) -> Numo::DFloat
+         | (Numo::Bit) -> Numo::DFloat
+         | (Complex) -> Numo::DComplex
+         | (Numeric) -> Numo::DFloat
+    def /: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::DFloat
+         | (Numo::UInt32) -> Numo::DFloat
+         | (Numo::UInt16) -> Numo::DFloat
+         | (Numo::UInt8) -> Numo::DFloat
+         | (Numo::Int64) -> Numo::DFloat
+         | (Numo::Int32) -> Numo::DFloat
+         | (Numo::Int16) -> Numo::DFloat
+         | (Numo::Int8) -> Numo::DFloat
+         | (Numo::Bit) -> Numo::DFloat
+         | (Complex) -> Numo::DComplex
+         | (Numeric) -> Numo::DFloat
+    # def coerce: (Complex) -> [Numo::DComplex, Numo::DFloat]
+    #           | (Numeric) -> [Numo::DFloat, Numo::DFloat]
+  end
+
+  class SFloat < NArray
+  end
+
+  class Int64 < NArray
+  end
+
+  class Int32 < NArray
+    def self.cast: (untyped) -> Numo::Int32
+    def []: (*untyped) -> untyped
+    def each_with_index: () { ([Integer, Integer]) -> [Integer, Integer] } -> untyped
+    def eq: (untyped) -> Numo::Bit
+    def expand_dims: (untyped) -> Numo::Int32
+    def seq: (*untyped) -> Numo::Int32
+    def +: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::Int64
+         | (Numo::UInt32) -> Numo::Int32
+         | (Numo::UInt16) -> Numo::Int32
+         | (Numo::UInt8) -> Numo::Int32
+         | (Numo::Int64) -> Numo::Int64
+         | (Numo::Int32) -> Numo::Int32
+         | (Numo::Int16) -> Numo::Int32
+         | (Numo::Int8) -> Numo::Int32
+         | (Numo::Bit) -> Numo::Int32
+         | (Complex) -> Numo::DComplex
+         | (Float) -> Numo::DFloat
+         | (Numeric) -> Numo::Int32
+    def -: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::Int64
+         | (Numo::UInt32) -> Numo::Int32
+         | (Numo::UInt16) -> Numo::Int32
+         | (Numo::UInt8) -> Numo::Int32
+         | (Numo::Int64) -> Numo::Int64
+         | (Numo::Int32) -> Numo::Int32
+         | (Numo::Int16) -> Numo::Int32
+         | (Numo::Int8) -> Numo::Int32
+         | (Numo::Bit) -> Numo::Int32
+         | (Complex) -> Numo::DComplex
+         | (Float) -> Numo::DFloat
+         | (Numeric) -> Numo::Int32
+    def *: (Numo::DFloat) -> Numo::DFloat
+         | (Numo::SFloat) -> Numo::SFloat
+         | (Numo::DComplex) -> Numo::DComplex
+         | (Numo::SComplex) -> Numo::SComplex
+         | (Numo::RObject) -> Numo::RObject
+         | (Numo::UInt64) -> Numo::Int64
+         | (Numo::UInt32) -> Numo::Int32
+         | (Numo::UInt16) -> Numo::Int32
+         | (Numo::UInt8) -> Numo::Int32
+         | (Numo::Int64) -> Numo::Int64
+         | (Numo::Int32) -> Numo::Int32
+         | (Numo::Int16) -> Numo::Int32
+         | (Numo::Int8) -> Numo::Int32
+         | (Numo::Bit) -> Numo::Int32
+         | (Complex) -> Numo::DComplex
+         | (Float) -> Numo::DFloat
+         | (Numeric) -> Numo::Int32
+  end
+
+  class Int16 < NArray
+  end
+
+  class Int8 < NArray
+  end
+
+  class UInt64 < NArray
+  end
+
+  class UInt32 < NArray
+  end
+
+  class UInt16 < NArray
+  end
+
+  class UInt8 < NArray
+  end
+
+  class Bit < NArray
+  end
+end
+
+module Rumale
+  module Base
+    module BaseEstimator
+      attr_reader params: Hash[Symbol, untyped]
+
+      private
+
+      def enable_linalg?: (?warning: bool warning) -> bool
+      def enable_parallel?: () -> bool
+      def n_processes: () -> (1 | Integer)
+      def parallel_map: (untyped n_outputs) { () -> untyped } -> untyped
+    end
+
+    module Classifier
+      include Validation
+
+      def fit: () -> untyped
+      def predict: () -> untyped
+      def score: (untyped x, untyped y) -> untyped
+    end
+
+    module Regressor
+      include Validation
+
+      def fit: () -> untyped
+      def predict: () -> untyped
+      def score: (untyped x, untyped y) -> untyped
+    end
+  end
+end
+
+module Rumale
+  module Validation
+    def self?.check_convert_sample_array: (untyped x) -> untyped
+    def self?.check_convert_label_array: (untyped y) -> untyped
+    def self?.check_convert_tvalue_array: (untyped y) -> untyped
+    def self?.check_sample_label_size: (untyped x, untyped y) -> nil
+    def self?.check_sample_tvalue_size: (untyped x, untyped y) -> nil
+    def self?.check_params_type: (untyped `type`, ?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_type_or_nil: (untyped `type`, ?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_numeric: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_numeric_or_nil: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_string: (?::Hash[untyped, untyped] params) -> untyped
+    def self?.check_params_boolean: (?::Hash[untyped, untyped] params) -> nil
+    def self?.check_params_positive: (?::Hash[untyped, untyped] params) -> nil
+  end
+end

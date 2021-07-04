@@ -1,0 +1,5 @@
+module Rumale
+  module SVM
+    VERSION: String
+  end
+end

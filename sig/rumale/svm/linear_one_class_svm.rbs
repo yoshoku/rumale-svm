@@ -1,0 +1,24 @@
+module Rumale
+  module SVM
+    class LinearOneClassSVM
+      include Base::BaseEstimator
+      include Validation
+
+      attr_reader weight_vec: Numo::DFloat
+      attr_reader bias_term: Float
+
+      def initialize: (?nu: Float nu, ?reg_param: Float reg_param, ?tol: Float tol,
+                       ?verbose: bool verbose, ?random_seed: untyped? random_seed) -> void
+      def fit: (Numo::DFloat x, ?untyped? _y) -> LinearOneClassSVM
+      def decision_function: (Numo::DFloat x) -> Numo::DFloat
+      def predict: (Numo::DFloat x) -> Numo::Int32
+      def marshal_dump: () -> { params: Hash[Symbol, untyped], model: untyped, weight_vec: Numo::DFloat, bias_term: Float }
+      def marshal_load: (untyped obj) -> void
+
+      private
+
+      def liblinear_params: () -> untyped
+      def trained?: () -> bool
+    end
+  end
+end

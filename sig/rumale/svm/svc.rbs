@@ -1,0 +1,34 @@
+module Rumale
+  module SVM
+    class SVC
+      include Base::BaseEstimator
+      include Base::Classifier
+
+      def initialize: (?reg_param: Float reg_param, ?kernel: String kernel, ?degree: Integer degree, ?gamma: Float gamma,
+                       ?coef0: Float coef0, ?shrinking: bool shrinking, ?probability: bool probability,
+                       ?cache_size: Float cache_size, ?tol: Float tol,
+                       ?verbose: bool verbose, ?random_seed: untyped? random_seed) -> void
+      def fit: (Numo::DFloat x, Numo::Int32 y) -> SVC
+      def decision_function: (Numo::DFloat x) -> Numo::DFloat
+      def predict: (Numo::DFloat x) -> Numo::Int32
+      def predict_proba: (Numo::DFloat x) -> Numo::DFloat
+      def marshal_dump: () -> { params: Hash[Symbol, untyped], model: untyped }
+      def marshal_load: (Hash[Symbol, untyped] obj) -> nil
+      def support: () -> Numo::Int32
+      def support_vectors: () -> Numo::DFloat
+      def n_support: () -> Numo::Int32
+      def duel_coef: () -> Numo::DFloat
+      def intercept: () -> Numo::DFloat
+      def prob_a: () -> Numo::DFloat
+      def prob_b: () -> Numo::DFloat
+
+      private
+
+      def add_index_col: (Numo::DFloat x) -> Numo::DFloat
+      def del_index_col: (Numo::DFloat x) -> Numo::DFloat
+      def precomputed_kernel?: () -> bool
+      def libsvm_params: () -> untyped
+      def trained?: () -> bool
+    end
+  end
+end

@@ -1,0 +1,29 @@
+module Rumale
+  module SVM
+    class LinearSVR
+      include Base::BaseEstimator
+      include Base::Regressor
+
+      attr_reader weight_vec: Numo::DFloat
+      attr_reader bias_term: Numo::DFloat
+
+      def initialize: (?loss: String loss, ?dual: bool dual, ?reg_param: Float reg_param, ?epsilon: Float epsilon,
+                       ?fit_bias: bool fit_bias, ?bias_scale: Float bias_scale, ?tol: Float tol,
+                       ?verbose: bool verbose, ?random_seed: untyped? random_seed) -> void
+      def fit: (Numo::DFloat x, Numo::DFloat y) -> LinearSVR
+      def predict: (Numo::DFloat x) -> Numo::DFloat
+      def marshal_dump: () -> { params: Hash[Symbol, untyped], model: untyped, weight_vec: Numo::DFloat, bias_term: Numo::DFloat }
+      def marshal_load: (Hash[Symbol, untyped] obj) -> void
+
+      private
+
+      def expand_feature: (Numo::DFloat x) -> Numo::DFloat
+      def weight_and_bias: (Numo::DFloat base_weight) -> [Numo::DFloat, Numo::DFloat]
+      def liblinear_params: () -> untyped
+      def solver_type: () -> Integer
+      def fit_bias?: () -> bool
+      def bias_scale: () -> Float
+      def trained?: () -> bool
+    end
+  end
+end
