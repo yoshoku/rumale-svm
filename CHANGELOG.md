@@ -1,3 +1,6 @@
+# 0.5.0
+- Add type declaration files.
+
 # 0.4.0
 - Add linear one-class support vector machine.
 
