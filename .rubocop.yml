@@ -5,36 +5,26 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
   DisplayCopNames: true
   DisplayStyleGuide: true
   Exclude:
     - 'bin/*'
-    - 'rumale-svm.gemspec'
-    - 'Rakefile'
-    - 'Gemfile'
+    - 'vendor/**/*'
+    - Steepfile
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
 
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
 Layout/LineLength:
   Max: 145
-  IgnoredPatterns: ['(\A|\s)#']
+  AllowedPatterns: ['(\A|\s)#']
 
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
 
 Metrics/ModuleLength:
   Max: 200
@@ -65,47 +55,14 @@ Metrics/ParameterLists:
 Naming/MethodParameterName:
   Enabled: false
 
-Naming/ConstantName:
-  Enabled: false
-
 Security/MarshalLoad:
   Enabled: false
 
 Style/Documentation:
   Enabled: false
 
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Style/SlicingWithRange:
-  Enabled: true
-
-Style/FormatStringToken:
-  Enabled: false
-
-Style/NumericLiterals:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
 RSpec/ExampleLength:
   Max: 40
-
-RSpec/InstanceVariable:
-  Enabled: false
-
-RSpec/LeakyConstantDeclaration:
-  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 25
