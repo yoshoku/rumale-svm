@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'numo-liblinear', '~> 1.1'
-  spec.add_runtime_dependency 'numo-libsvm', '~> 1.0'
-  spec.add_runtime_dependency 'rumale', '~> 0.14'
+  spec.add_dependency 'numo-liblinear', '~> 1.1'
+  spec.add_dependency 'numo-libsvm', '~> 1.0'
+  spec.add_dependency 'rumale', '~> 0.14', '< 0.24'
 end
