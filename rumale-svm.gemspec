@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rumale/svm/version'
@@ -21,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/yoshoku/rumale-svm'
   spec.metadata['changelog_uri'] = 'https://github.com/yoshoku/rumale-svm/blob/main/CHANGELOG.md'
   spec.metadata['documentation_uri'] = 'https://yoshoku.github.io/rumale-svm/doc/'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
