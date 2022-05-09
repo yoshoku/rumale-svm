@@ -1,3 +1,6 @@
+# 0.5.1
+- Refator specs and config files.
+
 # 0.5.0
 - Add type declaration files.
 
