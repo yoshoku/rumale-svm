@@ -28,7 +28,7 @@ RSpec.describe Rumale::SVM::OneClassSVM do
 
     before { ocsvm.fit(x_pos) }
 
-    it 'evaluates performance' do
+    it 'evaluates performance', :aggregate_failures do
       expect(ocsvm.support.class).to eq(Numo::Int32)
       expect(ocsvm.support.ndim).to eq(1)
       expect(ocsvm.support.shape[0]).to eq(n_sv)
@@ -51,14 +51,14 @@ RSpec.describe Rumale::SVM::OneClassSVM do
       expect(predicted.eq(-1).count).to be < 200
     end
 
-    it 'calculates decision function values' do
+    it 'calculates decision function values', :aggregate_failures do
       expect(dfs.class).to eq(Numo::DFloat)
       expect(dfs.ndim).to eq(1)
       expect(dfs.shape[0]).to eq(n_samples)
       expect(dfs.ge(0).count).to eq(predicted.eq(1).count)
     end
 
-    it 'dumps and restores itself using Marshal module.' do
+    it 'dumps and restores itself using Marshal module', :aggregate_failures do
       expect(copied.instance_variable_get(:@model)).to eq(ocsvm.instance_variable_get(:@model))
       expect(copied.params).to eq(ocsvm.params)
     end
@@ -101,7 +101,7 @@ RSpec.describe Rumale::SVM::OneClassSVM do
   context 'when called predict method before training with fit method' do
     let(:kernel) { 'linear' }
 
-    it 'raises Runtime error' do
+    it 'raises Runtime error', :aggregate_failures do
       expect { ocsvm.predict(x) }.to raise_error(
         RuntimeError, 'Rumale::SVM::OneClassSVM#predict expects to be called after training the model with the fit method.'
       )

@@ -18,7 +18,7 @@ RSpec.describe Rumale::SVM::LinearSVR do
   shared_examples 'regression task' do
     before { svr.fit(x, y) }
 
-    it 'evaluates regression performance' do
+    it 'evaluates regression performance', :aggregate_failures do
       expect(svr.weight_vec.class).to eq(Numo::DFloat)
       expect(svr.weight_vec.ndim).to eq(1)
       expect(svr.weight_vec.shape[0]).to eq(n_features)
@@ -29,7 +29,7 @@ RSpec.describe Rumale::SVM::LinearSVR do
       expect(predicted.shape[0]).to eq(n_samples)
     end
 
-    it 'dumps and restores itself using Marshal module.' do
+    it 'dumps and restores itself using Marshal module', :aggregate_failures do
       expect(copied.instance_variable_get(:@model)).to eq(svr.instance_variable_get(:@model))
       expect(copied.instance_variable_get(:@prob_param)).to eq(svr.instance_variable_get(:@prob_param))
       expect(copied.params).to eq(svr.params)

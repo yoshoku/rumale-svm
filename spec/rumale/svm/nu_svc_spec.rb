@@ -21,7 +21,7 @@ RSpec.describe Rumale::SVM::NuSVC do
 
     before { svc.fit(x, y) }
 
-    it 'evaluates classification performance' do
+    it 'evaluates classification performance', :aggregate_failures do
       expect(svc.support.class).to eq(Numo::Int32)
       expect(svc.support.ndim).to eq(1)
       expect(svc.support.shape[0]).to eq(n_sv)
@@ -51,14 +51,14 @@ RSpec.describe Rumale::SVM::NuSVC do
       expect(predicted.shape[0]).to eq(n_samples)
     end
 
-    it 'calculates decision function values' do
+    it 'calculates decision function values', :aggregate_failures do
       expect(dfs.class).to eq(Numo::DFloat)
       expect(dfs.ndim).to eq(2)
       expect(dfs.shape[0]).to eq(n_samples)
       expect(dfs.shape[1]).to eq(n_classes * (n_classes - 1) / 2)
     end
 
-    it 'predicts class probabilities' do
+    it 'predicts class probabilities', :aggregate_failures do
       expect(probs.class).to eq(Numo::DFloat)
       expect(probs.ndim).to eq(2)
       expect(probs.shape[0]).to eq(n_samples)
@@ -66,7 +66,7 @@ RSpec.describe Rumale::SVM::NuSVC do
       expect(predict_pr).to eq(y)
     end
 
-    it 'dumps and restores itself using Marshal module.' do
+    it 'dumps and restores itself using Marshal module', :aggregate_failures do
       expect(copied.instance_variable_get(:@params)).to eq(svc.instance_variable_get(:@params))
       expect(copied.instance_variable_get(:@model)).to eq(svc.instance_variable_get(:@model))
       expect(copied.score(x, y)).to eq(svc.score(x, y))
@@ -129,7 +129,7 @@ RSpec.describe Rumale::SVM::NuSVC do
   context 'when called predict method before training with fit method' do
     let(:dataset) { three_blobs }
 
-    it 'raises Runtime error' do
+    it 'raises Runtime error', :aggregate_failures do
       expect { svc.predict(x) }.to raise_error(
         RuntimeError, 'Rumale::SVM::NuSVC#predict expects to be called after training the model with the fit method.'
       )
