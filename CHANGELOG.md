@@ -1,3 +1,6 @@
+# 0.6.0
+- Update numo-libsvm and numo-liblinear depedency to v2.0 or higher.
+
 # 0.5.1
 - Refator specs and config files.
 
