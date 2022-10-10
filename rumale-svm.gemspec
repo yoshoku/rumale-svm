@@ -36,6 +36,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'numo-liblinear', '~> 2.0'
-  spec.add_dependency 'numo-libsvm', '~> 2.0'
+  spec.add_dependency 'numo-libsvm', '~> 2.1'
   spec.add_dependency 'rumale', '~> 0.14', '< 0.24'
 end

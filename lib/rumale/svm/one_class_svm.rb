@@ -24,15 +24,16 @@ module Rumale
       # @param gamma [Float] The gamma parameter in rbf/poly/sigmoid kernel function.
       # @param coef0 [Float] The coefficient in poly/sigmoid kernel function.
       # @param shrinking [Boolean] The flag indicating whether to use the shrinking heuristics.
+      # @param probability [Boolean] The flag indicating whether to train the parameter for probability estimation.
       # @param cache_size [Float] The cache memory size in MB.
       # @param tol [Float] The tolerance of termination criterion.
       # @param verbose [Boolean] The flag indicating whether to output learning process message
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(nu: 1.0, kernel: 'rbf', degree: 3, gamma: 1.0, coef0: 0.0,
-                     shrinking: true, cache_size: 200.0, tol: 1e-3, verbose: false, random_seed: nil)
+                     shrinking: true, probability: true, cache_size: 200.0, tol: 1e-3, verbose: false, random_seed: nil)
         check_params_numeric(nu: nu, degree: degree, gamma: gamma, coef0: coef0, cache_size: cache_size, tol: tol)
         check_params_string(kernel: kernel)
-        check_params_boolean(shrinking: shrinking, verbose: verbose)
+        check_params_boolean(shrinking: shrinking, probability: probability, verbose: verbose)
         check_params_numeric_or_nil(random_seed: random_seed)
         @params = {}
         @params[:nu] = nu.to_f
@@ -41,6 +42,7 @@ module Rumale
         @params[:gamma] = gamma.to_f
         @params[:coef0] = coef0.to_f
         @params[:shrinking] = shrinking
+        @params[:probability] = probability
         @params[:cache_size] = cache_size.to_f
         @params[:tol] = tol.to_f
         @params[:verbose] = verbose
@@ -80,6 +82,19 @@ module Rumale
         raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         Numo::Int32.cast(Numo::Libsvm.predict(x, libsvm_params, @model))
+      end
+
+      # Predict class probability for samples.
+      # This method works correctly only if the probability parameter is true.
+      #
+      # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the probailities.
+      #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
+      # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
+      def predict_proba(x)
+        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}\##{__method__} expects to be called after training the probablity parameters." unless trained_probs?
+        x = check_convert_sample_array(x)
+        Numo::Libsvm.predict_proba(x, libsvm_params, @model)
       end
 
       # Dump marshal data.
@@ -149,6 +164,10 @@ module Rumale
 
       def trained?
         !@model.nil?
+      end
+
+      def trained_probs?
+        @model[:prob_density_marks].is_a?(Numo::NArray)
       end
     end
   end

@@ -24,6 +24,7 @@ RSpec.describe Rumale::SVM::OneClassSVM do
   shared_examples 'distribution estimation task' do
     let(:dfs) { ocsvm.decision_function(x) }
     let(:predicted) { ocsvm.predict(x) }
+    let(:probs) { ocsvm.predict_proba(x) }
     let(:n_sv) { ocsvm.n_support }
 
     before { ocsvm.fit(x_pos) }
@@ -56,6 +57,13 @@ RSpec.describe Rumale::SVM::OneClassSVM do
       expect(dfs.ndim).to eq(1)
       expect(dfs.shape[0]).to eq(n_samples)
       expect(dfs.ge(0).count).to eq(predicted.eq(1).count)
+    end
+
+    it 'estimates probabilities', :aggregate_failures do
+      expect(probs.class).to eq(Numo::DFloat)
+      expect(probs.ndim).to eq(2)
+      expect(probs.shape[0]).to eq(n_samples)
+      expect(probs.shape[1]).to eq(2)
     end
 
     it 'dumps and restores itself using Marshal module', :aggregate_failures do
