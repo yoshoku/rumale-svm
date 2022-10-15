@@ -10,6 +10,7 @@ module Rumale
       def fit: (Numo::DFloat x, ?untyped? _y) -> OneClassSVM
       def decision_function: (Numo::DFloat x) -> Numo::DFloat
       def predict: (Numo::DFloat x) -> Numo::Int32
+      def predict_proba: (Numo::DFloat x) -> Numo::DFloat
       def marshal_dump: () -> { params: Hash[Symbol, untyped], model: untyped }
       def marshal_load: (Hash[Symbol, untyped] obj) -> void
       def support: () -> Numo::Int32
