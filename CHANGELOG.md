@@ -1,3 +1,7 @@
+# 0.7.0
+- Support for probabilistic outputs with Rumale::SVM::OneClassSVM.
+- Update numo-libsvm depedency to v2.1 or higher.
+
 # 0.6.0
 - Update numo-libsvm and numo-liblinear depedency to v2.0 or higher.
 
