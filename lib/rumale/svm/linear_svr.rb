@@ -76,7 +76,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the labels.
       # @return [Numo::DFloat] (shape: [n_samples]) Predicted value per sample.
       def predict(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.predict(xx, liblinear_params, @model)

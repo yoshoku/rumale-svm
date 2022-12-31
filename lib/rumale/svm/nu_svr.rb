@@ -68,7 +68,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples]) Predicted value per sample.
       def predict(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.predict(xx, libsvm_params, @model)

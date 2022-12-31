@@ -68,7 +68,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         Numo::Libsvm.decision_function(x, libsvm_params, @model)
       end
@@ -79,7 +79,7 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::Int32] (shape: [n_samples]) Predicted label per sample.
       def predict(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         Numo::Int32.cast(Numo::Libsvm.predict(x, libsvm_params, @model))
       end
@@ -91,8 +91,8 @@ module Rumale
       #   If the kernel is 'precomputed', the shape of x must be [n_samples, n_training_samples].
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
       def predict_proba(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
-        raise "#{self.class.name}\##{__method__} expects to be called after training the probablity parameters." unless trained_probs?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the probablity parameters." unless trained_probs?
         x = check_convert_sample_array(x)
         Numo::Libsvm.predict_proba(x, libsvm_params, @model)
       end

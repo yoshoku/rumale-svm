@@ -63,7 +63,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to compute the scores.
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         Numo::Liblinear.decision_function(x, liblinear_params, @model)
       end
@@ -73,7 +73,7 @@ module Rumale
       # @param x [Numo::DFloat] (shape: [n_samples, n_features]) The samples to predict the labels.
       # @return [Numo::Int32] (shape: [n_samples]) Predicted label per sample.
       def predict(x)
-        raise "#{self.class.name}\##{__method__} expects to be called after training the model with the fit method." unless trained?
+        raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
         x = check_convert_sample_array(x)
         Numo::Int32.cast(Numo::Liblinear.predict(x, liblinear_params, @model))
       end
