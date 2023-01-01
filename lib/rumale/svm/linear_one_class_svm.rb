@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'numo/liblinear'
-require 'rumale/base/base_estimator'
+require 'rumale/base/estimator'
 require 'rumale/validation'
 
 module Rumale
@@ -12,10 +12,7 @@ module Rumale
     #   estimator = Rumale::SVM::LinearOneClassSVM.new(nu: 0.05, random_seed: 1)
     #   estimator.fit(training_samples, traininig_labels)
     #   results = estimator.predict(testing_samples)
-    class LinearOneClassSVM
-      include Base::BaseEstimator
-      include Validation
-
+    class LinearOneClassSVM < Rumale::Base::Estimator
       # Return the weight vector for LinearOneClassSVM.
       # @return [Numo::DFloat] (shape: [n_features])
       attr_reader :weight_vec
@@ -32,9 +29,7 @@ module Rumale
       # @param verbose [Boolean] The flag indicating whether to output learning process message
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(nu: 0.05, reg_param: 1.0, tol: 1e-3, verbose: false, random_seed: nil)
-        check_params_numeric(nu: nu, reg_param: reg_param, tol: tol)
-        check_params_boolean(verbose: verbose)
-        check_params_numeric_or_nil(random_seed: random_seed)
+        super()
         @params = {}
         @params[:nu] = nu.to_f
         @params[:reg_param] = reg_param.to_f
@@ -50,7 +45,7 @@ module Rumale
       #
       # @return [LinearOneClassSVM] The learned estimator itself.
       def fit(x, _y = nil)
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         dummy = Numo::DFloat.ones(x.shape[0])
         @model = Numo::Liblinear.train(x, dummy, liblinear_params)
         @weight_vec = @model[:w].dup
@@ -64,7 +59,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         Numo::Liblinear.decision_function(x, liblinear_params, @model)
       end
 
@@ -74,7 +69,7 @@ module Rumale
       # @return [Numo::Int32] (shape: [n_samples]) Predicted label per sample.
       def predict(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         Numo::Int32.cast(Numo::Liblinear.predict(x, liblinear_params, @model))
       end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'numo/liblinear'
-require 'rumale/base/base_estimator'
+require 'rumale/base/estimator'
 require 'rumale/base/classifier'
 
 module Rumale
@@ -12,9 +12,8 @@ module Rumale
     #   estimator = Rumale::SVM::LogisticRegression.new(penalty: 'l2', dual: false, reg_param: 1.0, random_seed: 1)
     #   estimator.fit(training_samples, traininig_labels)
     #   results = estimator.predict(testing_samples)
-    class LogisticRegression
-      include Base::BaseEstimator
-      include Base::Classifier
+    class LogisticRegression < Rumale::Base::Estimator
+      include Rumale::Base::Classifier
 
       # Return the weight vector for LogisticRegression.
       # @return [Numo::DFloat] (shape: [n_classes, n_features])
@@ -39,10 +38,7 @@ module Rumale
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(penalty: 'l2', dual: true, reg_param: 1.0,
                      fit_bias: true, bias_scale: 1.0, tol: 1e-3, verbose: false, random_seed: nil)
-        check_params_string(penalty: penalty)
-        check_params_numeric(reg_param: reg_param, bias_scale: bias_scale, tol: tol)
-        check_params_boolean(dual: dual, fit_bias: fit_bias, verbose: verbose)
-        check_params_numeric_or_nil(random_seed: random_seed)
+        super()
         @params = {}
         @params[:penalty] = penalty == 'l1' ? 'l1' : 'l2'
         @params[:dual] = dual
@@ -60,9 +56,9 @@ module Rumale
       # @param y [Numo::Int32] (shape: [n_samples]) The labels to be used for fitting the model.
       # @return [LogisticRegression] The learned classifier itself.
       def fit(x, y)
-        x = check_convert_sample_array(x)
-        y = check_convert_label_array(y)
-        check_sample_label_size(x, y)
+        x = Rumale::Validation.check_convert_sample_array(x)
+        y = Rumale::Validation.check_convert_label_array(y)
+        Rumale::Validation.check_sample_size(x, y)
         xx = fit_bias? ? expand_feature(x) : x
         @model = Numo::Liblinear.train(xx, y, liblinear_params)
         @weight_vec, @bias_term = weight_and_bias(@model[:w])
@@ -75,7 +71,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.decision_function(xx, liblinear_params, @model)
       end
@@ -86,7 +82,7 @@ module Rumale
       # @return [Numo::Int32] (shape: [n_samples]) Predicted class label per sample.
       def predict(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Int32.cast(Numo::Liblinear.predict(xx, liblinear_params, @model))
       end
@@ -98,7 +94,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
       def predict_proba(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = fit_bias? ? expand_feature(x) : x
         Numo::Liblinear.predict_proba(xx, liblinear_params, @model)
       end

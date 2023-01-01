@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'numo/libsvm'
-require 'rumale/base/base_estimator'
+require 'rumale/base/estimator'
 require 'rumale/base/classifier'
+require 'rumale/validation'
 
 module Rumale
   module SVM
@@ -12,9 +13,8 @@ module Rumale
     #   estimator = Rumale::SVM::SVC.new(reg_param: 1.0, kernel: 'rbf', gamma: 10.0, random_seed: 1)
     #   estimator.fit(training_samples, traininig_labels)
     #   results = estimator.predict(testing_samples)
-    class SVC
-      include Base::BaseEstimator
-      include Base::Classifier
+    class SVC < Rumale::Base::Estimator
+      include Rumale::Base::Classifier
 
       # Create a new classifier with Kernel C-Support Vector Classifier.
       #
@@ -31,10 +31,7 @@ module Rumale
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(reg_param: 1.0, kernel: 'rbf', degree: 3, gamma: 1.0, coef0: 0.0,
                      shrinking: true, probability: true, cache_size: 200.0, tol: 1e-3, verbose: false, random_seed: nil)
-        check_params_numeric(reg_param: reg_param, degree: degree, gamma: gamma, coef0: coef0, cache_size: cache_size, tol: tol)
-        check_params_string(kernel: kernel)
-        check_params_boolean(shrinking: shrinking, probability: probability, verbose: verbose)
-        check_params_numeric_or_nil(random_seed: random_seed)
+        super()
         @params = {}
         @params[:reg_param] = reg_param.to_f
         @params[:kernel] = kernel
@@ -56,9 +53,9 @@ module Rumale
       # @param y [Numo::Int32] (shape: [n_samples]) The labels to be used for fitting the model.
       # @return [SVC] The learned classifier itself.
       def fit(x, y)
-        x = check_convert_sample_array(x)
-        y = check_convert_label_array(y)
-        check_sample_label_size(x, y)
+        x = Rumale::Validation.check_convert_sample_array(x)
+        y = Rumale::Validation.check_convert_label_array(y)
+        Rumale::Validation.check_sample_size(x, y)
         xx = precomputed_kernel? ? add_index_col(x) : x
         @model = Numo::Libsvm.train(xx, y, libsvm_params)
         self
@@ -71,7 +68,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Confidence score per sample.
       def decision_function(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.decision_function(xx, libsvm_params, @model)
       end
@@ -83,7 +80,7 @@ module Rumale
       # @return [Numo::Int32] (shape: [n_samples]) Predicted class label per sample.
       def predict(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Int32.cast(Numo::Libsvm.predict(xx, libsvm_params, @model))
       end
@@ -96,7 +93,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples, n_classes]) Predicted probability of each class per sample.
       def predict_proba(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.predict_proba(xx, libsvm_params, @model)
       end

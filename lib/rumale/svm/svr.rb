@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'numo/libsvm'
-require 'rumale/base/base_estimator'
+require 'rumale/base/estimator'
 require 'rumale/base/regressor'
+require 'rumale/validation'
 
 module Rumale
   module SVM
@@ -12,9 +13,8 @@ module Rumale
     #   estimator = Rumale::SVM::SVR.new(reg_param: 1.0, kernel: 'rbf', gamma: 10.0, random_seed: 1)
     #   estimator.fit(training_samples, traininig_target_values)
     #   results = estimator.predict(testing_samples)
-    class SVR
-      include Base::BaseEstimator
-      include Base::Regressor
+    class SVR < Rumale::Base::Estimator
+      include Rumale::Base::Regressor
 
       # Create a new regressor with Kernel Epsilon-Support Vector Regressor.
       #
@@ -31,11 +31,7 @@ module Rumale
       # @param random_seed [Integer/Nil] The seed value using to initialize the random generator.
       def initialize(reg_param: 1.0, epsilon: 0.1, kernel: 'rbf', degree: 3, gamma: 1.0, coef0: 0.0,
                      shrinking: true, cache_size: 200.0, tol: 1e-3, verbose: false, random_seed: nil)
-        check_params_numeric(reg_param: reg_param, degree: degree, epsilon: epsilon, gamma: gamma, coef0: coef0,
-                             cache_size: cache_size, tol: tol)
-        check_params_string(kernel: kernel)
-        check_params_boolean(shrinking: shrinking, verbose: verbose)
-        check_params_numeric_or_nil(random_seed: random_seed)
+        super()
         @params = {}
         @params[:reg_param] = reg_param.to_f
         @params[:epsilon] = epsilon.to_f
@@ -57,9 +53,9 @@ module Rumale
       # @param y [Numo::DFloat] (shape: [n_samples]) The target values to be used for fitting the model.
       # @return [SVR] The learned regressor itself.
       def fit(x, y)
-        x = check_convert_sample_array(x)
-        y = check_convert_tvalue_array(y)
-        check_sample_tvalue_size(x, y)
+        x = Rumale::Validation.check_convert_sample_array(x)
+        y = Rumale::Validation.check_convert_target_value_array(y)
+        Rumale::Validation.check_sample_size(x, y)
         xx = precomputed_kernel? ? add_index_col(x) : x
         @model = Numo::Libsvm.train(xx, y, libsvm_params)
         self
@@ -72,7 +68,7 @@ module Rumale
       # @return [Numo::DFloat] (shape: [n_samples]) Predicted value per sample.
       def predict(x)
         raise "#{self.class.name}##{__method__} expects to be called after training the model with the fit method." unless trained?
-        x = check_convert_sample_array(x)
+        x = Rumale::Validation.check_convert_sample_array(x)
         xx = precomputed_kernel? ? add_index_col(x) : x
         Numo::Libsvm.predict(xx, libsvm_params, @model)
       end
