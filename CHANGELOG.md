@@ -1,3 +1,6 @@
+# 0.8.0
+- Refactor to support the new Rumale API.
+
 # 0.7.0
 - Support for probabilistic outputs with Rumale::SVM::OneClassSVM.
 - Update numo-libsvm depedency to v2.1 or higher.
@@ -6,7 +9,7 @@
 - Update numo-libsvm and numo-liblinear depedency to v2.0 or higher.
 
 # 0.5.1
-- Refator specs and config files.
+- Refactor specs and config files.
 
 # 0.5.0
 - Add type declaration files.
