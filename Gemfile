@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in rumale-svm.gemspec
 gemspec
 
+gem 'lbfgsb', '~> 0.5.2'
+gem 'numo-tiny_linalg', '~> 0.3.4'
 gem 'rake', '~> 12.0'
 gem 'rbs', '~> 1.2'
 gem 'rspec', '~> 3.0'
