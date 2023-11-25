@@ -11,10 +11,10 @@ Gem::Specification.new do |spec|
   spec.email         = ['yoshoku@outlook.com']
 
   spec.summary       = <<~MSG
-    Rumale::SVM provides support vector machine algorithms of LIBSVM and LIBLINEAR with Rumale interface.
+    Rumale::SVM provides support vector machine algorithms using LIBSVM and LIBLINEAR with Rumale interface.
   MSG
   spec.description = <<~MSG
-    Rumale::SVM provides support vector machine algorithms of LIBSVM and LIBLINEAR with Rumale interface.
+    Rumale::SVM provides support vector machine algorithms using LIBSVM and LIBLINEAR with Rumale interface.
   MSG
   spec.homepage = 'https://github.com/yoshoku/rumale-svm'
   spec.license = 'BSD-3-Clause'

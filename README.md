@@ -5,13 +5,9 @@
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/rumale-svm/blob/main/LICENSE.txt)
 [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://yoshoku.github.io/rumale-svm/doc/)
 
-Rumale::SVM provides support vector machine algorithms in
+Rumale::SVM provides support vector machine algorithms using
 [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/) and [LIBLINEAR](https://www.csie.ntu.edu.tw/~cjlin/liblinear/)
 with [Rumale](https://github.com/yoshoku/rumale) interface.
-Many machine learning libraries use LIBSVM and LIBLINEAR as background libraries of support vector machine algorithms.
-On the other hand, Rumale implements support vector machine algorithms based on the mini-batch stochastic gradient descent method
-implemented in Ruby.
-Rumale::SVM adds the functions of support vector machine similar to general machine learning libraries to Rumale.
 
 ## Installation
 
