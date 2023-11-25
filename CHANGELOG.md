@@ -1,3 +1,6 @@
+# 0.9.0
+- Add Rumale::SVM::LocallyLinearSVC that is classifier with locally linear support vector machine.
+
 # 0.8.0
 - Refactor to support the new Rumale API.
 
