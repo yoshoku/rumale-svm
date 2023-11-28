@@ -1,0 +1,27 @@
+# TypeProf 0.21.8
+
+# Classes
+module Rumale
+  module SVM
+    class RandomRecursiveSVC
+      @params: {n_hidden_layers: Integer, beta: Float, penalty: String, loss: String, dual: bool, reg_param: Float, fit_bias: bool, bias_scale: Float, tol: Float, verbose: bool, random_seed: Integer}
+      @rng: Random
+
+      attr_reader classifiers: Array[Rumale::SVM::LinearSVC]
+      attr_reader random_matrices: Array[Numo::DFloat]
+      def initialize: (?n_hidden_layers: Integer, ?beta: Float, ?penalty: String, ?loss: String, ?dual: bool, ?reg_param: Float, ?fit_bias: bool, ?bias_scale: Float, ?tol: Float, ?verbose: bool, ?random_seed: (nil | Integer)) -> void
+      def fit: (Numo::DFloat x, Numo::Int32 y) -> RandomRecursiveSVC
+      def decision_function: (Numo::DFloat x) -> Numo::DFloat
+      def predict: (Numo::DFloat x) -> Numo::Int32
+      def transform: (Numo::DFloat x) -> Numo::DFloat
+
+      private
+
+      def partial_fit: (Numo::DFloat x, Numo::DFloat y) -> void
+      def linear_svc_params: -> (Hash[:beta | :bias_scale | :dual | :fit_bias | :loss | :n_hidden_layers | :penalty | :random_seed | :reg_param | :tol | :verbose, Float | Integer | String | bool])
+      def sigmoid: (Numo::DFloat x) -> Numo::DFloat
+
+      RRSVC_PARAMS: [:n_hidden_layers, :beta]
+    end
+  end
+end
