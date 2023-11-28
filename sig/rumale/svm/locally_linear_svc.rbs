@@ -1,0 +1,32 @@
+# TypeProf 0.21.8
+
+# Classes
+module Rumale
+  module SVM
+    class LocallyLinearSVC
+      @params: {reg_param: Float, reg_param_local: Float, max_iter: Integer, n_anchors: Integer, tol: Float, n_neighbors: Integer, fit_bias: bool, bias_scale: Float, random_seed: Integer}
+      @rng: Random
+      @coeff: Numo::DFloat
+
+      attr_reader classes: Numo::Int32
+      attr_reader anchors: Numo::DFloat
+      attr_reader weight_vec: Numo::DFloat
+      attr_reader bias_term: Numo::DFloat
+      def initialize: (?reg_param: Float, ?reg_param_local: Float, ?max_iter: Integer, ?tol: Float, ?n_anchors: Integer, ?n_neighbors: Integer, ?fit_bias: bool, ?bias_scale: Float, ?random_seed: (nil | Integer)) -> void
+      def fit: (Numo::DFloat x, Numo::Int32 y) -> LocallyLinearSVC
+      def decision_function: (Numo::DFloat x) -> Numo::DFloat
+      def predict: (Numo::DFloat x) -> Numo::Int32
+
+      private
+
+      def partial_fit: (Numo::DFloat base_x, Numo::Int32 bin_y) -> [Numo::DFloat, Numo::DFloat]
+      def local_coordinates: (Numo::DFloat xi) -> Numo::DFloat
+      def find_neighbors: (Numo::DFloat xi) -> Numo::Int32
+      def find_anchors: (Numo::DFloat x) -> void
+      def assign_anchors: (Numo::DFloat x) -> Integer
+      def fit_bias?: -> bool
+      def expand_feature: (Numo::DFloat x) -> Numo::DFloat
+      def multiclass_problem?: -> bool
+    end
+  end
+end
