@@ -1,3 +1,7 @@
+# 0.10.0
+- Add Rumale::SVM::RandomRecursiveSVC that is classifier with random recursive support vector machine.
+- Add type declaration files for RandomRecursiveSVC and LocallyLinearSVC.
+
 # 0.9.0
 - Add Rumale::SVM::LocallyLinearSVC that is classifier with locally linear support vector machine.
 
