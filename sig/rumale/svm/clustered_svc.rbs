@@ -1,0 +1,29 @@
+# TypeProf 0.21.8
+
+# Classes
+module Rumale
+  module SVM
+    class ClusteredSVC
+      @params: {n_clusters: Integer, reg_param_global: Float, max_iter_kmeans: Integer, tol_kmeans: Float, penalty: String, loss: String, dual: bool, reg_param: Float, fit_bias: bool, bias_scale: Float, tol: Float, verbose: bool, random_seed: Integer}
+      @rng: Random
+
+      attr_reader model: Rumale::SVM::LinearSVC
+      attr_accessor cluster_centers: Numo::DFloat
+      def initialize: (?n_clusters: Integer, ?reg_param_global: Float, ?max_iter_kmeans: Integer, ?tol_kmeans: Float, ?penalty: String, ?loss: String, ?dual: bool, ?reg_param: Float, ?fit_bias: bool, ?bias_scale: Float, ?tol: Float, ?verbose: bool, ?random_seed: (nil | Integer)) -> void
+      def fit: (Numo::DFloat x, Numo::Int32 y) -> ClusteredSVC
+      def decision_function: (Numo::DFloat x) -> Numo::DFloat
+      def predict: (Numo::DFloat x) -> Numo::Int32
+      def transform: (Numo::DFloat x) -> Numo::DFloat
+
+      private
+
+      def linear_svc_params: -> (Hash[:bias_scale | :dual | :fit_bias | :loss | :max_iter_kmeans | :n_clusters | :penalty | :random_seed | :reg_param | :reg_param_global | :tol | :tol_kmeans | :verbose, Float | Integer | String | bool])
+      def clustering: (Numo::DFloat x) -> void
+      def assign_cluster_id: (Numo::DFloat x) -> Numo::Int32
+      def expand_feature: (Numo::DFloat x) -> Numo::DFloat
+      def fit_bias?: -> bool
+
+      CLUSTERED_SVC_BINARY_PARAMS: [:n_clusters, :reg_param_global, :max_iter_kmeans, :tol_kmeans]
+    end
+  end
+end
