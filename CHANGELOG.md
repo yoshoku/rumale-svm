@@ -1,3 +1,6 @@
+# [[0.11.0](https://github.com/yoshoku/rumale-svm/compare/v0.10.0...v0.11.0)]
+- Add Rumale::SVM::ClusteredSVC that is classifier with clustered support vector machine.
+
 # 0.10.0
 - Add Rumale::SVM::RandomRecursiveSVC that is classifier with random recursive support vector machine.
 - Add type declaration files for RandomRecursiveSVC and LocallyLinearSVC.
