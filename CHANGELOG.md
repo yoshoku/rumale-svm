@@ -1,3 +1,6 @@
+# [[0.12.0](https://github.com/yoshoku/rumale-svm/compare/v0.11.0...v0.12.0)]
+- Fix the version specification of rumale-core gem.
+
 # [[0.11.0](https://github.com/yoshoku/rumale-svm/compare/v0.10.0...v0.11.0)]
 - Add Rumale::SVM::ClusteredSVC that is classifier with clustered support vector machine.
 
