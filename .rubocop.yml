@@ -58,6 +58,9 @@ Naming/MethodParameterName:
 Security/MarshalLoad:
   Enabled: false
 
+Style/CollectionQuerying:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
