@@ -41,7 +41,7 @@ module Rumale
         @params[:cache_size] = cache_size.to_f
         @params[:tol] = tol.to_f
         @params[:verbose] = verbose
-        @params[:random_seed] = random_seed.nil? ? nil : random_seed.to_i
+        @params[:random_seed] = random_seed&.to_i
       end
 
       # Fit the model with given training data.
