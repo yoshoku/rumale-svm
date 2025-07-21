@@ -117,7 +117,7 @@ module Rumale
         z[true, 0...n_features] = 1.fdiv(Math.sqrt(@params[:reg_param_global])) * x
         @params[:n_clusters].times do |n|
           assigned_bits = cluster_ids.eq(n)
-          z[assigned_bits.where, n_features * (n + 1)...n_features * (n + 2)] = x[assigned_bits.where, true]
+          z[assigned_bits.where, (n_features * (n + 1))...(n_features * (n + 2))] = x[assigned_bits.where, true]
         end
 
         z
