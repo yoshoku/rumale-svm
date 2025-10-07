@@ -9,12 +9,12 @@ require 'rumale/validation'
 module Rumale
   module SVM
     # LocallyLinearSVC is a class that implements Locally Linear Support Vector Classifier with the squared hinge loss.
-    # This classifier requires Numo::Linalg (or Numo::TinyLinalg) and Lbfgsb gems,
+    # This classifier requires numo-linalg-alt and Lbfgsb gems,
     # but they are listed in the runtime dependencies of Rumale::SVM.
-    # Therefore, you should install and load Numo::Linalg and Lbfgsb gems explicitly to use this classifier.
+    # Therefore, you should install and load numo-linalg-alt and Lbfgsb gems explicitly to use this classifier.
     #
     # @example
-    #   require 'numo/linalg/autoloader'
+    #   require 'numo/linalg'
     #   require 'lbfgsb'
     #   require 'rumale/svm'
     #

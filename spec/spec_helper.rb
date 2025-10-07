@@ -11,8 +11,7 @@ require 'rumale/pairwise_metric'
 require 'rumale/model_selection/stratified_k_fold'
 require 'rumale/model_selection/k_fold'
 require 'lbfgsb'
-require 'numo/tiny_linalg'
-Numo::Linalg = Numo::TinyLinalg unless defined?(Numo::Linalg)
+require 'numo/linalg'
 
 def xor_data(n_samples = 1000)
   rng = Random.new(1)
