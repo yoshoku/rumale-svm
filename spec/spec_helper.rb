@@ -10,8 +10,8 @@ require 'rumale/dataset'
 require 'rumale/pairwise_metric'
 require 'rumale/model_selection/stratified_k_fold'
 require 'rumale/model_selection/k_fold'
-require 'lbfgsb'
 require 'numo/linalg'
+require 'numo/optimize'
 
 def xor_data(n_samples = 1000)
   rng = Random.new(1)

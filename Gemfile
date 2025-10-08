@@ -5,8 +5,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in rumale-svm.gemspec
 gemspec
 
-gem 'lbfgsb', '~> 0.5.2'
 gem 'numo-linalg-alt', '~> 0.3'
+gem 'numo-optimize', '~> 0.2'
 gem 'rake', '~> 12.0'
 gem 'rbs', '~> 3.3'
 gem 'rspec', '~> 3.0'

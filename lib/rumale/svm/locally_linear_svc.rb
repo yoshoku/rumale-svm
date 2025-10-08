@@ -9,13 +9,13 @@ require 'rumale/validation'
 module Rumale
   module SVM
     # LocallyLinearSVC is a class that implements Locally Linear Support Vector Classifier with the squared hinge loss.
-    # This classifier requires numo-linalg-alt and Lbfgsb gems,
+    # This classifier requires numo-linalg-alt and numo-optimize gems,
     # but they are listed in the runtime dependencies of Rumale::SVM.
-    # Therefore, you should install and load numo-linalg-alt and Lbfgsb gems explicitly to use this classifier.
+    # Therefore, you should install and load numo-linalg-alt and numo-optimize gems explicitly to use this classifier.
     #
     # @example
     #   require 'numo/linalg'
-    #   require 'lbfgsb'
+    #   require 'numo/optimize'
     #   require 'rumale/svm'
     #
     #   estimator = Rumale::SVM::LocallyLinearSVC.new(reg_param: 1.0, n_anchors: 128)
@@ -82,7 +82,7 @@ module Rumale
         x = Rumale::Validation.check_convert_sample_array(x)
         y = Rumale::Validation.check_convert_label_array(y)
         Rumale::Validation.check_sample_size(x, y)
-        raise 'LocallyLinearSVC#fit requires Lbfgsb but that is not loaded' unless defined?(Lbfgsb)
+        raise 'LocallyLinearSVC#fit requires numo-optimize but that is not loaded' unless defined?(Numo::Optimize)
 
         @classes = Numo::Int32[*y.to_a.uniq.sort]
 
@@ -188,9 +188,9 @@ module Rumale
         sub_rng = @rng.dup
         w_init = 2.0 * ::Rumale::Utils.rand_uniform(@params[:n_anchors] * n_features, sub_rng) - 1.0
 
-        res = Lbfgsb.minimize(
+        res = Numo::Optimize.minimize(
           fnc: fnc, jcb: true, x_init: w_init, args: [base_x, bin_y, @coeff, @params[:reg_param]],
-          maxiter: @params[:max_iter], factr: @params[:tol] / Lbfgsb::DBL_EPSILON,
+          maxiter: @params[:max_iter], factr: @params[:tol] / Numo::Optimize::Lbfgsb::DBL_EPSILON,
           verbose: @params[:verbose] ? 1 : -1
         )
 
