@@ -5,6 +5,6 @@ module Rumale
   # This module consists of Rumale interfaces for suppor vector machine algorithms using LIBSVM and LIBLINEAR.
   module SVM
     # The version of Rumale::SVM you are using.
-    VERSION = '0.12.0'
+    VERSION = '1.0.0'
   end
 end

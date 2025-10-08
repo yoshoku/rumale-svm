@@ -1,3 +1,10 @@
+# [[1.0.0](https://github.com/yoshoku/rumale-svm/compare/v0.12.0...v1.0.0)]
+
+- Update numo-libsvm and numo-liblinear to v3.0.
+- Update rumale-core to v2.0.
+
+Note: With these changes, the rumale-svm now depends on [numo-narray-alt](https://github.com/yoshoku/numo-narray-alt) instead of numo-narray.
+
 # [[0.12.0](https://github.com/yoshoku/rumale-svm/compare/v0.11.0...v0.12.0)]
 - Fix the version specification of rumale-core gem.
 
