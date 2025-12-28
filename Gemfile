@@ -7,7 +7,7 @@ gemspec
 
 gem 'numo-linalg-alt', '~> 0.3'
 gem 'numo-optimize', '~> 0.2'
-gem 'rake', '~> 12.0'
+gem 'rake', '~> 13.0'
 gem 'rbs', '~> 3.3'
 gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.0'
